@@ -44,7 +44,7 @@
 
                     var pos = {
                         x: radius * Math.sin(THREE.Math.degToRad(ang)),
-                        y: -4 + (i % 2) * 15,
+                        y: 1,//-4 + (i % 2) * 15,
                         z: radius * Math.cos(THREE.Math.degToRad(ang))
                     };
 
@@ -78,7 +78,7 @@
         <a-sky src="#green" position="" rotation="" scale="" visible="" material="" geometry=""></a-sky>
         <!--<a-plane src="#groundTexture" rotation="-90 0 0" width="10" height="10" repeat="10 10"></a-plane>-->
 
-        <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-0.9 4 -3" scale="1.5 1.5 1.5"></a-text>
+        <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="0 3 -3" scale="1.5 1.5 1.5"></a-text>
 
         <!-- Match Daydream controller if present, regardless of hand. -->
         <a-entity daydream-controls></a-entity>
