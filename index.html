@@ -3,10 +3,51 @@
 <head>
     <title>UMA VR</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script>
+        var umaPrograms = [
+            'Architecture',
+            'Art',
+            'Aviation',
+            'Applied Science',
+            'Biology',
+            'Business Administration',
+            'Computer Information Systems',
+            'Dental Assisting',
+            'Dental Hygiene',
+            'English',
+            'Financial Services',
+            'Interdisciplinary Studies',
+            'Information and Library Services',
+            'Justice Studies',
+            'Liberal Studies',
+            'Mental Health and Human Services',
+            'Medical Laboratory Technology',
+            'Jazz and Contemporary Music',
+            'Nursing',
+            'Public Administration',
+            'Social Science',
+            'Veterinary Technology'
+        ];
+
+        AFRAME.registerComponent('uma-programs', {
+            init: function () {
+                // Solution for Creating Entities.
+                var sceneEl = document.querySelector('a-scene');
+
+                for (var i = 0; i < umaPrograms.length; i++) {
+                    var boxEl = document.createElement('a-entity');
+                    boxEl.setAttribute('text', 'color: white; align: center; width: 5; font: exo2semibold; value: ' + umaPrograms[i]);
+                    boxEl.setAttribute('position', { x: i * 5, y: 2, z: -4 });
+                    
+                    sceneEl.appendChild(boxEl);
+                }
+            }
+        });
+    </script>
 </head>
 
 <body>
-    <a-scene>
+    <a-scene uma-programs>
         <a-assets>
             <img id="green" src="quad-backdrop.jpg">
             <!--<img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">-->
@@ -19,50 +60,6 @@
 
         <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-0.9 4 -3" scale="1.5 1.5 1.5"></a-text>
 
-        <a-entity position="0 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-              value: Architecture"></a-entity>
-        <a-entity position="5 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-              value: Art"></a-entity>
-        <a-entity position="10 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                    value: Aviation"></a-entity>
-        <a-entity position="15 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                          value: Applied Science"></a-entity>
-        <a-entity position="20 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                value: Biology"></a-entity>
-        <a-entity position="25 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                      value: Business Administration"></a-entity>
-        <a-entity position="30 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                            value: Computer Information Systems"></a-entity>
-        <a-entity position="35 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                  value: Dental Assisting"></a-entity>
-        <a-entity position="40 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                        value: Dental Hygiene"></a-entity>
-        <a-entity position="45 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                              value: English"></a-entity>
-        <a-entity position="50 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                    value: Financial Services"></a-entity>
-        <a-entity position="55 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                          value: Interdisciplinary Studies"></a-entity>
-        <a-entity position="60 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                value: Information and Library Services"></a-entity>
-        <a-entity position="65 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                      value: Justice Studies"></a-entity>
-        <a-entity position="70 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                            value: Liberal Studies"></a-entity>
-        <a-entity position="75 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                  value: Mental Health and Human Services"></a-entity>
-        <a-entity position="80 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                        value: Medical Laboratory Technology"></a-entity>
-        <a-entity position="85 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                              value: Jazz and Contemporary Music"></a-entity>
-        <a-entity position="90 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                                    value: Nursing"></a-entity>
-        <a-entity position="95 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                                          value: Public Administration"></a-entity>
-        <a-entity position="100 2 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                                                value: Social Science"></a-entity>
-        <a-entity position="105 0 -4" text="color: white; align: center; width: 5; font: exo2semibold;
-                                                                                                                                      value: Veterinary Technology"></a-entity>
         <!-- Match Daydream controller if present, regardless of hand. -->
         <a-entity daydream-controls></a-entity>
     </a-scene>
