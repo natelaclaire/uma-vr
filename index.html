@@ -104,6 +104,19 @@
                     boxEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
                     sceneEl.appendChild(boxEl);
 
+                    boxEl.addEventListener('trackpaddown', function(e) {
+                        var text = boxEl.getAttribute('text');
+                        console.log(text);
+                        text.color = 'pink';
+                        boxEl.setAttribute('text', text);
+                    });
+                    boxEl.addEventListener('mouseenter', function(e) {
+                        var text = boxEl.getAttribute('text');
+                        console.log(text);
+                        text.color = 'pink';
+                        boxEl.setAttribute('text', text);
+                    });
+
                     ang += angFrac;
                 }
             }
@@ -127,6 +140,8 @@
 
         <!-- Match Daydream controller if present, regardless of hand. -->
         <a-entity daydream-controls></a-entity>
+        
+        <!--<a-camera><a-cursor></a-cursor></a-camera>-->
     </a-scene>
 </body>
 
