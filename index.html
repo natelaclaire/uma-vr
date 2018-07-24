@@ -29,34 +29,79 @@
             'Veterinary Technology'
         ];
 
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
         AFRAME.registerComponent('uma-programs', {
             init: function () {
                 // Solution for Creating Entities.
                 var sceneEl = document.querySelector('a-scene');
 
-                var angFrac = 360 / umaPrograms.length;
+                var randomPrograms = shuffle(umaPrograms);
+
+                var angFrac = 360 / randomPrograms.length;
                 var ang = 0.00;
                 var radius = 5.0;
                 var up = new THREE.Vector3(0, 1, 0);
 
-                for (var i = 0; i < umaPrograms.length; i++) {
+                for (var i = 0; i < randomPrograms.length; i++) {
                     var x = i, y = i, z = 1;
+                    console.log(ang);
 
                     var pos = {
                         x: radius * Math.sin(THREE.Math.degToRad(ang)),
-                        y: 1,//-4 + (i % 2) * 15,
+                        y: (i % 2),
                         z: radius * Math.cos(THREE.Math.degToRad(ang))
                     };
 
-                    alert(pos);
+                    //alert(pos);
 
                     var rot = new THREE.Quaternion();
                     rot.setFromAxisAngle(up, ang);
+                    //console.log(rot);
+
+                    var vectorRot = new THREE.Vector3(
+                        THREE.Math.degToRad(pos.x),
+                        THREE.Math.degToRad(pos.y),
+                        THREE.Math.degToRad(pos.z)
+                    );
+                    vectorRot.applyQuaternion(rot);
+                    //console.log(vectorRot);
+
+                    /*var stringRot = THREE.Math.radToDeg(vectorRot.x) + " " + 
+                    THREE.Math.radToDeg(vectorRot.y) + " " + 
+                    THREE.Math.radToDeg(vectorRot.z);*/
+                    var rotAng = 0.00;
+
+                    if (ang < 180) {
+                        rotAng = -(180 - ang);
+                    } else {
+                        rotAng = ang - 180;
+                    }
+
+                    var stringRot = "0 " + rotAng.toFixed(0) + " 0";
+                    console.log(stringRot);
 
                     var boxEl = document.createElement('a-entity');
-                    boxEl.setAttribute('text', 'color: white; align: center; width: 5; font: exo2semibold; value: ' + umaPrograms[i]);
+                    boxEl.setAttribute('text', 'color: white; align: center; width: 4; font: exo2semibold; value: ' + randomPrograms[i]);
                     boxEl.setAttribute('position', pos);
-                    boxEl.setAttribute('rotation', rot);
+                    boxEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
                     sceneEl.appendChild(boxEl);
 
                     ang += angFrac;
@@ -78,7 +123,7 @@
         <a-sky src="#green" position="" rotation="" scale="" visible="" material="" geometry=""></a-sky>
         <!--<a-plane src="#groundTexture" rotation="-90 0 0" width="10" height="10" repeat="10 10"></a-plane>-->
 
-        <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="0 3 -3" scale="1.5 1.5 1.5"></a-text>
+        <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-3 3 -3" scale="1.5 1.5 1.5"></a-text>
 
         <!-- Match Daydream controller if present, regardless of hand. -->
         <a-entity daydream-controls></a-entity>
