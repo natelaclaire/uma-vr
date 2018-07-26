@@ -5,28 +5,28 @@
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script>
         var umaPrograms = [
-            'Architecture',
-            'Art',
-            'Aviation',
-            'Applied Science',
-            'Biology',
-            'Business Administration',
-            'Computer Information Systems',
-            'Dental Assisting',
-            'Dental Hygiene',
-            'English',
-            'Financial Services',
-            'Interdisciplinary Studies',
-            'Information and Library Services',
-            'Justice Studies',
-            'Liberal Studies',
-            'Mental Health and Human Services',
-            'Medical Laboratory Technology',
-            'Jazz and Contemporary Music',
-            'Nursing',
-            'Public Administration',
-            'Social Science',
-            'Veterinary Technology'
+            {title:'Architecture'                           , video: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4'},
+            {title:'Art'                                    , link: '/' },
+            {title:'Aviation'                               },
+            {title:'Applied Science'                        },
+            {title:'Biology'                                },
+            {title:'Business Administration'                },
+            {title:'Computer Information Systems'           },
+            {title:'Dental Assisting'                       },
+            {title:'Dental Hygiene'                         },
+            {title:'English'                                },
+            {title:'Financial Services'                     },
+            {title:'Interdisciplinary Studies'              },
+            {title:'Information and Library Services'       },
+            {title:'Justice Studies'                        },
+            {title:'Liberal Studies'                        },
+            {title:'Mental Health and Human Services'       },
+            {title:'Medical Laboratory Technology'          },
+            {title:'Jazz and Contemporary Music'            },
+            {title:'Nursing'                                },
+            {title:'Public Administration'                  },
+            {title:'Social Science'                         },
+            {title:'Veterinary Technology'                  }
         ];
 
         function shuffle(array) {
@@ -48,12 +48,13 @@
             return array;
         }
 
+        var randomPrograms = shuffle(umaPrograms);
+
         AFRAME.registerComponent('uma-programs', {
             init: function () {
                 // Solution for Creating Entities.
                 var sceneEl = document.querySelector('a-scene');
-
-                var randomPrograms = shuffle(umaPrograms);
+                var assetsEl = document.querySelector('a-assets');
 
                 var angFrac = 360 / randomPrograms.length;
                 var ang = 0.00;
@@ -105,18 +106,36 @@
                     boxEl.setAttribute('height', '0.3');
                     boxEl.setAttribute('depth', '0.1');
                     boxEl.setAttribute('color', 'black');
+                    boxEl.setAttribute('programArrayIndex', i);
                     //boxEl.setAttribute('opacity', '0.3');
                     sceneEl.appendChild(boxEl);
 
                     var textEl = document.createElement('a-entity');
-                    textEl.setAttribute('text', 'color: white; align: center; width: 3; font: exo2semibold; value: ' + randomPrograms[i]);
+                    textEl.setAttribute('text', 'color: white; align: center; width: 3; font: exo2semibold; value: ' + randomPrograms[i].title);
                     //textEl.setAttribute('position', pos);
                     //textEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
-                    textEl.setAttribute('position', '0 0 0.11')
+                    textEl.setAttribute('position', '0 0 0.11');
                     boxEl.appendChild(textEl);
 
                     boxEl.addEventListener('click', function(e) {
                         e.currentTarget.setAttribute('color', '#333');
+                        var i = e.currentTarget.getAttribute('programArrayIndex');
+
+                        if ('video' in randomPrograms[i]) {
+                            var videoDisplayPos = randomPrograms[i].pos;
+                            //videoDisplayPos.x -= 2;
+                            console.log(randomPrograms[i].video);
+                            var videoDisplayEl = document.createElement('a-video');
+                            //videoDisplayEl.setAttribute('src', '#' + randomPrograms[i].videoId);
+                            videoDisplayEl.setAttribute('src', randomPrograms[i].video);
+                            videoDisplayEl.setAttribute('width', '8');
+                            videoDisplayEl.setAttribute('height', '4.5');
+                            videoDisplayEl.setAttribute('position', videoDisplayPos);
+                            videoDisplayEl.setAttribute('rotation', '0 ' + randomPrograms[i].rotAng + ' 0');
+                            sceneEl.appendChild(videoDisplayEl);
+                        } else if ('link' in randomPrograms[i]) {
+                            document.location = randomPrograms[i].link;
+                        }
                     });
                     boxEl.addEventListener('mouseenter', function(e) {
                         e.currentTarget.setAttribute('color', '#666');
@@ -140,6 +159,21 @@
                         text.color = 'white';
                         e.target.setAttribute('text', text);
                     });*/
+
+                    randomPrograms[i].element = boxEl;
+                    randomPrograms[i].ang = ang;
+                    randomPrograms[i].rotAng = rotAng;
+                    randomPrograms[i].pos = pos;
+
+                    /*if ('video' in randomPrograms[i]) {
+                        randomPrograms[i].videoId = 'video' + i;
+
+                        var videoEl = document.createElement('video');
+                        videoEl.setAttribute('id', randomPrograms[i].videoId);
+                        videoEl.setAttribute('loop', 'false');
+                        videoEl.setAttribute('src', randomPrograms[i].video);
+                        assetsEl.appendChild(videoEl);
+                    }*/
 
                     ang += angFrac;
                 }
