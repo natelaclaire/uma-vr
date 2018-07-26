@@ -115,8 +115,8 @@
                     textEl.setAttribute('position', '0 0 0.11')
                     boxEl.appendChild(textEl);
 
-                    boxEl.addEventListener('trackpaddown', function(e) {
-                        e.currentTarget.setAttribute('color', '#666');
+                    boxEl.addEventListener('click', function(e) {
+                        e.currentTarget.setAttribute('color', '#333');
                     });
                     boxEl.addEventListener('mouseenter', function(e) {
                         e.currentTarget.setAttribute('color', '#666');
@@ -163,7 +163,8 @@
         <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-3 2 -3" scale="1.5 1.5 1.5"></a-text>
 
         <!-- Match Daydream controller if present, regardless of hand. -->
-        <a-entity daydream-controls></a-entity>
+        <!--<a-entity daydream-controls></a-entity>-->
+        <a-entity laser-controls></a-entity>
         
         <a-camera><a-cursor></a-cursor></a-camera>
     </a-scene>
