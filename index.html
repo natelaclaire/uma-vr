@@ -98,27 +98,48 @@
                     var stringRot = "0 " + rotAng.toFixed(0) + " 0";
                     console.log(stringRot);
 
-                    var boxEl = document.createElement('a-entity');
-                    boxEl.setAttribute('text', 'color: white; align: center; width: 4; font: exo2semibold; value: ' + randomPrograms[i]);
+                    var boxEl = document.createElement('a-box');
                     boxEl.setAttribute('position', pos);
                     boxEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
+                    boxEl.setAttribute('width', '2.6');
+                    boxEl.setAttribute('height', '0.3');
+                    boxEl.setAttribute('depth', '0.1');
+                    boxEl.setAttribute('color', 'black');
+                    boxEl.setAttribute('opacity', '0.3');
                     sceneEl.appendChild(boxEl);
 
+                    var textEl = document.createElement('a-entity');
+                    textEl.setAttribute('text', 'color: white; align: center; width: 3; font: exo2semibold; value: ' + randomPrograms[i]);
+                    //textEl.setAttribute('position', pos);
+                    //textEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
+                    textEl.setAttribute('position', '0 0 0.11')
+                    boxEl.appendChild(textEl);
+
                     boxEl.addEventListener('trackpaddown', function(e) {
-                        var text = e.target.getAttribute('text');
-                        text.color = '#BBB';
-                        e.target.setAttribute('text', text);
+                        e.currentTarget.setAttribute('color', 'white');
                     });
                     boxEl.addEventListener('mouseenter', function(e) {
+                        e.currentTarget.setAttribute('color', 'white');
+                    });
+                    boxEl.addEventListener('mouseleave', function(e) {
+                        e.currentTarget.setAttribute('color', 'black');
+                    });
+
+                    /*textEl.addEventListener('trackpaddown', function(e) {
                         var text = e.target.getAttribute('text');
                         text.color = '#BBB';
                         e.target.setAttribute('text', text);
                     });
-                    boxEl.addEventListener('mouseleave', function(e) {
+                    textEl.addEventListener('mouseenter', function(e) {
+                        var text = e.target.getAttribute('text');
+                        text.color = '#BBB';
+                        e.target.setAttribute('text', text);
+                    });
+                    textEl.addEventListener('mouseleave', function(e) {
                         var text = e.target.getAttribute('text');
                         text.color = 'white';
                         e.target.setAttribute('text', text);
-                    });
+                    });*/
 
                     ang += angFrac;
                 }
