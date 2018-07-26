@@ -105,7 +105,7 @@
                     boxEl.setAttribute('height', '0.3');
                     boxEl.setAttribute('depth', '0.1');
                     boxEl.setAttribute('color', 'black');
-                    boxEl.setAttribute('opacity', '0.3');
+                    //boxEl.setAttribute('opacity', '0.3');
                     sceneEl.appendChild(boxEl);
 
                     var textEl = document.createElement('a-entity');
@@ -116,10 +116,10 @@
                     boxEl.appendChild(textEl);
 
                     boxEl.addEventListener('trackpaddown', function(e) {
-                        e.currentTarget.setAttribute('color', 'white');
+                        e.currentTarget.setAttribute('color', '#666');
                     });
                     boxEl.addEventListener('mouseenter', function(e) {
-                        e.currentTarget.setAttribute('color', 'white');
+                        e.currentTarget.setAttribute('color', '#666');
                     });
                     boxEl.addEventListener('mouseleave', function(e) {
                         e.currentTarget.setAttribute('color', 'black');
