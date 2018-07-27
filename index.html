@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>UMA VR</title>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script>
-        /*
         var umaPrograms = [
             { title: 'Architecture', video: 'https://d2m5w5cc96s29t.cloudfront.net/bbb_sunflower_1080p_60fps_normal.mp4' },
             { title: 'Art', link: '/' },
@@ -143,28 +142,27 @@
                 }
             }
         });
-        */
     </script>
 </head>
 
 <body>
-    <a-scene>
-        <!--<a-assets>
-            <img id="green" src="">
+    <a-scene uma-programs>
+        <a-assets>
+            <img id="green" src="quad-backdrop-60percent.jpg">
             <a-asset-item id="bench" src="dfHWVwOAmLX/model.gltf"></a-asset-item>
-        </a-assets>-->
+        </a-assets>
 
-        <a-sky src="quad-backdrop-60percent.jpg"></a-sky>
+        <a-sky src="#green" position="" rotation="" scale="" visible="" material="" geometry=""></a-sky>
 
         <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-3 2 -3" scale="1.5 1.5 1.5"></a-text>
 
-        <!--<a-entity laser-controls></a-entity>
+        <a-entity laser-controls></a-entity>
 
         <a-entity gltf-model="#bench" scale="0.01 0.01 0.01"></a-entity>
 
         <a-camera>
             <a-cursor></a-cursor>
-        </a-camera>-->
+        </a-camera>
     </a-scene>
 </body>
 
