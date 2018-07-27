@@ -56,7 +56,7 @@
 
         AFRAME.registerComponent('uma-programs', {
             init: function () {
-                var sceneEl = document.querySelector('a-scene');
+                var sceneEl = document.querySelector('#programs');
                 var assetsEl = document.querySelector('a-assets');
 
                 var angFrac = 360 / randomPrograms.length;
@@ -162,6 +162,8 @@
         <a-camera>
             <a-cursor></a-cursor>
         </a-camera>
+
+        <a-entity id="programs"></a-entity>
     </a-scene>
 </body>
 
