@@ -54,6 +54,19 @@
 
         var randomPrograms = shuffle(umaPrograms);
 
+        AFRAME.registerComponent('group-opacity', {
+            schema: { opacity: { default: 1.0 } },
+            update: function () {
+                var opacity = this.data.opacity;
+                var children = [].slice.call(this.el.children);
+                children
+                    .filter(function (child) { return child.hasAttribute('opacity'); })
+                    .forEach(function (child) {
+                        child.setAttribute('opacity', opacity);
+                    });
+            }
+        });
+
         AFRAME.registerComponent('uma-programs', {
             init: function () {
                 var sceneEl = document.querySelector('#programs');
@@ -102,12 +115,14 @@
                     boxEl.setAttribute('height', '0.3');
                     boxEl.setAttribute('depth', '0.1');
                     boxEl.setAttribute('color', 'black');
+                    boxEl.setAttribute('opacity', '1');
                     boxEl.setAttribute('programArrayIndex', i);
                     sceneEl.appendChild(boxEl);
 
                     var textEl = document.createElement('a-entity');
                     textEl.setAttribute('text', 'color: white; align: center; width: 3; font: exo2semibold; value: ' + randomPrograms[i].title);
                     textEl.setAttribute('position', '0 0 0.11');
+                    textEl.setAttribute('opacity', '1');
                     boxEl.appendChild(textEl);
 
                     boxEl.addEventListener('click', function (e) {
@@ -124,7 +139,7 @@
                             videoDisplayEl.setAttribute('position', videoDisplayPos);
                             videoDisplayEl.setAttribute('rotation', '0 ' + randomPrograms[i].rotAng + ' 0');
                             sceneEl.appendChild(videoDisplayEl);
-                            
+
                             document.querySelector('#programs').emit('fade');
                         } else if ('link' in randomPrograms[i]) {
                             document.location = randomPrograms[i].link;
@@ -165,9 +180,9 @@
             <a-cursor></a-cursor>
         </a-camera>
 
-        <a-entity id="programs">
-            <a-animation attribute="material.opacity" begin="fade" to="0"></a-animation>
-            <a-animation attribute="material.opacity" begin="unfade" to="1"></a-animation>
+        <a-entity id="programs" group-opacity="opacity: 1">
+            <a-animation attribute="group-opacity.opacity" begin="fade" to="0"></a-animation>
+            <a-animation attribute="group-opacity.opacity" begin="unfade" to="1"></a-animation>
         </a-entity>
     </a-scene>
 </body>
