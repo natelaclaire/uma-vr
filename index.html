@@ -2,32 +2,34 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>UMA VR</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script>
+        /*
         var umaPrograms = [
-            {title:'Architecture'                           , video: 'https://d2m5w5cc96s29t.cloudfront.net/bbb_sunflower_1080p_60fps_normal.mp4'},
-            {title:'Art'                                    , link: '/' },
-            {title:'Aviation'                               },
-            {title:'Applied Science'                        },
-            {title:'Biology'                                },
-            {title:'Business Administration'                },
-            {title:'Computer Information Systems'           },
-            {title:'Dental Assisting'                       },
-            {title:'Dental Hygiene'                         },
-            {title:'English'                                },
-            {title:'Financial Services'                     },
-            {title:'Interdisciplinary Studies'              },
-            {title:'Information and Library Services'       },
-            {title:'Justice Studies'                        },
-            {title:'Liberal Studies'                        },
-            {title:'Mental Health and Human Services'       },
-            {title:'Medical Laboratory Technology'          },
-            {title:'Jazz and Contemporary Music'            },
-            {title:'Nursing'                                },
-            {title:'Public Administration'                  },
-            {title:'Social Science'                         },
-            {title:'Veterinary Technology'                  }
+            { title: 'Architecture', video: 'https://d2m5w5cc96s29t.cloudfront.net/bbb_sunflower_1080p_60fps_normal.mp4' },
+            { title: 'Art', link: '/' },
+            { title: 'Aviation' },
+            { title: 'Applied Science' },
+            { title: 'Biology' },
+            { title: 'Business Administration' },
+            { title: 'Computer Information Systems' },
+            { title: 'Dental Assisting' },
+            { title: 'Dental Hygiene' },
+            { title: 'English' },
+            { title: 'Financial Services' },
+            { title: 'Interdisciplinary Studies' },
+            { title: 'Information and Library Services' },
+            { title: 'Justice Studies' },
+            { title: 'Liberal Studies' },
+            { title: 'Mental Health and Human Services' },
+            { title: 'Medical Laboratory Technology' },
+            { title: 'Jazz and Contemporary Music' },
+            { title: 'Nursing' },
+            { title: 'Public Administration' },
+            { title: 'Social Science' },
+            { title: 'Veterinary Technology' }
         ];
 
         function shuffle(array) {
@@ -67,20 +69,20 @@
 
                     var pos = {
                         x: radius * Math.sin(THREE.Math.degToRad(ang)),
-                        y: ((i % 2)*0.5),
+                        y: ((i % 2) * 0.5),
                         z: radius * Math.cos(THREE.Math.degToRad(ang))
                     };
 
                     var rot = new THREE.Quaternion();
                     rot.setFromAxisAngle(up, ang);
-                    
+
                     var vectorRot = new THREE.Vector3(
                         THREE.Math.degToRad(pos.x),
                         THREE.Math.degToRad(pos.y),
                         THREE.Math.degToRad(pos.z)
                     );
                     vectorRot.applyQuaternion(rot);
-                    
+
                     var rotAng = 0.00;
 
                     if (ang < 180) {
@@ -107,13 +109,13 @@
                     textEl.setAttribute('position', '0 0 0.11');
                     boxEl.appendChild(textEl);
 
-                    boxEl.addEventListener('click', function(e) {
+                    boxEl.addEventListener('click', function (e) {
                         e.currentTarget.setAttribute('color', '#333');
                         var i = e.currentTarget.getAttribute('programArrayIndex');
 
                         if ('video' in randomPrograms[i]) {
                             var videoDisplayPos = randomPrograms[i].pos;
-                            
+
                             var videoDisplayEl = document.createElement('a-video');
                             videoDisplayEl.setAttribute('src', randomPrograms[i].video);
                             videoDisplayEl.setAttribute('width', '8');
@@ -125,10 +127,10 @@
                             document.location = randomPrograms[i].link;
                         }
                     });
-                    boxEl.addEventListener('mouseenter', function(e) {
+                    boxEl.addEventListener('mouseenter', function (e) {
                         e.currentTarget.setAttribute('color', '#666');
                     });
-                    boxEl.addEventListener('mouseleave', function(e) {
+                    boxEl.addEventListener('mouseleave', function (e) {
                         e.currentTarget.setAttribute('color', 'black');
                     });
 
@@ -141,6 +143,7 @@
                 }
             }
         });
+        */
     </script>
 </head>
 
@@ -150,16 +153,18 @@
             <img id="green" src="">
             <a-asset-item id="bench" src="dfHWVwOAmLX/model.gltf"></a-asset-item>
         </a-assets>-->
-        
+
         <a-sky src="quad-backdrop-60percent.jpg"></a-sky>
-        
+
         <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-3 2 -3" scale="1.5 1.5 1.5"></a-text>
 
-        <a-entity laser-controls></a-entity>
+        <!--<a-entity laser-controls></a-entity>
 
-        <!--<a-entity gltf-model="#bench" scale="0.01 0.01 0.01"></a-entity>-->
-        
-        <a-camera><a-cursor></a-cursor></a-camera>
+        <a-entity gltf-model="#bench" scale="0.01 0.01 0.01"></a-entity>
+
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>-->
     </a-scene>
 </body>
 
