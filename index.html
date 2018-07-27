@@ -5,7 +5,7 @@
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script>
         var umaPrograms = [
-            {title:'Architecture'                           , video: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4'},
+            {title:'Architecture'                           , video: 'https://d2m5w5cc96s29t.cloudfront.net/bbb_sunflower_1080p_60fps_normal.mp4'},
             {title:'Art'                                    , link: '/' },
             {title:'Aviation'                               },
             {title:'Applied Science'                        },
@@ -52,7 +52,6 @@
 
         AFRAME.registerComponent('uma-programs', {
             init: function () {
-                // Solution for Creating Entities.
                 var sceneEl = document.querySelector('a-scene');
                 var assetsEl = document.querySelector('a-assets');
 
@@ -71,23 +70,16 @@
                         z: radius * Math.cos(THREE.Math.degToRad(ang))
                     };
 
-                    //alert(pos);
-
                     var rot = new THREE.Quaternion();
                     rot.setFromAxisAngle(up, ang);
-                    //console.log(rot);
-
+                    
                     var vectorRot = new THREE.Vector3(
                         THREE.Math.degToRad(pos.x),
                         THREE.Math.degToRad(pos.y),
                         THREE.Math.degToRad(pos.z)
                     );
                     vectorRot.applyQuaternion(rot);
-                    //console.log(vectorRot);
-
-                    /*var stringRot = THREE.Math.radToDeg(vectorRot.x) + " " + 
-                    THREE.Math.radToDeg(vectorRot.y) + " " + 
-                    THREE.Math.radToDeg(vectorRot.z);*/
+                    
                     var rotAng = 0.00;
 
                     if (ang < 180) {
@@ -107,13 +99,10 @@
                     boxEl.setAttribute('depth', '0.1');
                     boxEl.setAttribute('color', 'black');
                     boxEl.setAttribute('programArrayIndex', i);
-                    //boxEl.setAttribute('opacity', '0.3');
                     sceneEl.appendChild(boxEl);
 
                     var textEl = document.createElement('a-entity');
                     textEl.setAttribute('text', 'color: white; align: center; width: 3; font: exo2semibold; value: ' + randomPrograms[i].title);
-                    //textEl.setAttribute('position', pos);
-                    //textEl.setAttribute('rotation', stringRot); // all show up with "-90 0 0"
                     textEl.setAttribute('position', '0 0 0.11');
                     boxEl.appendChild(textEl);
 
@@ -123,10 +112,8 @@
 
                         if ('video' in randomPrograms[i]) {
                             var videoDisplayPos = randomPrograms[i].pos;
-                            //videoDisplayPos.x -= 2;
-                            console.log(randomPrograms[i].video);
+                            
                             var videoDisplayEl = document.createElement('a-video');
-                            //videoDisplayEl.setAttribute('src', '#' + randomPrograms[i].videoId);
                             videoDisplayEl.setAttribute('src', randomPrograms[i].video);
                             videoDisplayEl.setAttribute('width', '8');
                             videoDisplayEl.setAttribute('height', '4.5');
@@ -144,36 +131,10 @@
                         e.currentTarget.setAttribute('color', 'black');
                     });
 
-                    /*textEl.addEventListener('trackpaddown', function(e) {
-                        var text = e.target.getAttribute('text');
-                        text.color = '#BBB';
-                        e.target.setAttribute('text', text);
-                    });
-                    textEl.addEventListener('mouseenter', function(e) {
-                        var text = e.target.getAttribute('text');
-                        text.color = '#BBB';
-                        e.target.setAttribute('text', text);
-                    });
-                    textEl.addEventListener('mouseleave', function(e) {
-                        var text = e.target.getAttribute('text');
-                        text.color = 'white';
-                        e.target.setAttribute('text', text);
-                    });*/
-
                     randomPrograms[i].element = boxEl;
                     randomPrograms[i].ang = ang;
                     randomPrograms[i].rotAng = rotAng;
                     randomPrograms[i].pos = pos;
-
-                    /*if ('video' in randomPrograms[i]) {
-                        randomPrograms[i].videoId = 'video' + i;
-
-                        var videoEl = document.createElement('video');
-                        videoEl.setAttribute('id', randomPrograms[i].videoId);
-                        videoEl.setAttribute('loop', 'false');
-                        videoEl.setAttribute('src', randomPrograms[i].video);
-                        assetsEl.appendChild(videoEl);
-                    }*/
 
                     ang += angFrac;
                 }
@@ -187,18 +148,12 @@
         <a-assets>
             <img id="green" src="quad-backdrop-60percent.jpg">
             <a-asset-item id="bench" src="dfHWVwOAmLX/model.gltf"></a-asset-item>
-            <!--<img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">-->
         </a-assets>
-        <!--<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>-->
+        
         <a-sky src="#green" position="" rotation="" scale="" visible="" material="" geometry=""></a-sky>
-        <!--<a-plane src="#groundTexture" rotation="-90 0 0" width="10" height="10" repeat="10 10"></a-plane>-->
-
+        
         <a-text value="Welcome to UMA! Choose a program:" color="#BBB" position="-3 2 -3" scale="1.5 1.5 1.5"></a-text>
 
-        <!-- Match Daydream controller if present, regardless of hand. -->
-        <!--<a-entity daydream-controls></a-entity>-->
         <a-entity laser-controls></a-entity>
 
         <a-entity gltf-model="#bench" scale="0.01 0.01 0.01"></a-entity>
