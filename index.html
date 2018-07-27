@@ -124,6 +124,8 @@
                             videoDisplayEl.setAttribute('position', videoDisplayPos);
                             videoDisplayEl.setAttribute('rotation', '0 ' + randomPrograms[i].rotAng + ' 0');
                             sceneEl.appendChild(videoDisplayEl);
+                            
+                            document.querySelector('#programs').emit('fade');
                         } else if ('link' in randomPrograms[i]) {
                             document.location = randomPrograms[i].link;
                         }
@@ -163,7 +165,10 @@
             <a-cursor></a-cursor>
         </a-camera>
 
-        <a-entity id="programs"></a-entity>
+        <a-entity id="programs">
+            <a-animation attribute="material.opacity" begin="fade" to="0"></a-animation>
+            <a-animation attribute="material.opacity" begin="unfade" to="1"></a-animation>
+        </a-entity>
     </a-scene>
 </body>
 
